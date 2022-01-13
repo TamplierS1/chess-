@@ -1,1 +1,1 @@
-target_sources(chess++ PRIVATE main.cpp game.cpp)
+target_sources(chesspp PRIVATE main.cpp game.cpp)

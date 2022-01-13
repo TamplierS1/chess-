@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.17.0)
-project(chess++)
+project(chesspp)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_BUILD_TYPE Debug)
 
-add_executable(chess++ "")
+add_executable(chesspp "")
 add_subdirectory(src)
 add_subdirectory(third_party/raylib)
 
@@ -31,7 +31,7 @@ list(APPEND CXX_INCLUDE_DIRS
 
 list(APPEND CXX_LINK_LIBS raylib stdc++fs)
 
-target_compile_options(chess++ PRIVATE ${CXX_COMPILE_FLAGS})
-target_include_directories(chess++ PRIVATE SYSTEM
+target_compile_options(chesspp PRIVATE ${CXX_COMPILE_FLAGS})
+target_include_directories(chesspp PRIVATE SYSTEM
         ${CXX_INCLUDE_DIRS})
-target_link_libraries(chess++ ${CXX_LINK_LIBS})
+target_link_libraries(chesspp ${CXX_LINK_LIBS})

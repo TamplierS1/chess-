@@ -1,11 +1,11 @@
-## chess++ 
+## chesspp 
 
 Chess engine written in C++.
 
 ## Build
 
 Run `build.sh` from the repo's root:  
-To launch the program run `build/chess++` from repo's root.  
+To launch the program run `build/chesspp` from repo's root.  
 
 Only Linux is supported.
 

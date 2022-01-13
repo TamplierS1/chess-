@@ -9,7 +9,7 @@
 
 Game::Game()
 {
-    InitWindow(window_width, window_height, "Chess++");
+    InitWindow(window_width, window_height, "chesspp");
     SetTargetFPS(60);
 
     load_textures();
