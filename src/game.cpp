@@ -7,6 +7,11 @@
 #include "raylib.h"
 #include "raymath.h"
 
+static Color get_tile_color(Vector2 pos)
+{
+    return static_cast<int>(pos.x + pos.y) % 2 == 0 ? RAYWHITE : DARKGRAY;
+}
+
 Game::Game()
 {
     InitWindow(window_width, window_height, "chesspp");
@@ -30,12 +35,13 @@ int Game::run()
 {
     while (!WindowShouldClose())
     {
+        handle_input();
+
         BeginDrawing();
 
         ClearBackground(WHITE);
 
-        draw_board();
-        draw_pieces();
+        draw();
 
         EndDrawing();
     }
@@ -98,35 +104,93 @@ void Game::load_textures()
     }
 }
 
+void Game::handle_input()
+{
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+        CheckCollisionPointRec(GetMousePosition(), Rectangle{board_pos.x, board_pos.y,
+                                                             board_size.x, board_size.y}))
+    {
+        if (selected_piece != nullptr)
+        {
+            selected_piece->pos = screen2board_pos(GetMousePosition());
+        }
+        else
+        {
+            for (auto& piece : board)
+            {
+                Vector2 piece_pos = board2screen_pos(piece.pos);
+                if (CheckCollisionPointRec(
+                        GetMousePosition(),
+                        Rectangle{piece_pos.x, piece_pos.y, texture_size * texture_scale,
+                                  texture_size * texture_scale}))
+                {
+                    selected_piece = &piece;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+void Game::draw()
+{
+    draw_board();
+    draw_selection();
+    draw_pieces();
+}
+
 void Game::draw_pieces()
 {
     for (const auto& piece : board)
     {
         // I subtract 1 from piece's position because the rendered position
         // is 1 less than the in-game position.
-        DrawTextureEx(
-            textures[piece.texture_name],
-            Vector2Add(board_pos, Vector2Scale(Vector2SubtractValue(piece.pos, 1),
-                                               texture_size * texture_scale)),
-            0.0f, texture_scale, WHITE);
+        DrawTextureEx(textures[piece.texture_name], board2screen_pos(piece.pos), 0.0f,
+                      texture_scale, WHITE);
     }
 }
 
 void Game::draw_board()
 {
-    for (int x = 0; x <= 7; x++)
+    for (int x = 1; x <= 8; x++)
     {
-        for (int y = 0; y <= 7; y++)
+        for (int y = 1; y <= 8; y++)
         {
-            Color color = DARKGRAY;
-            if ((x + y) % 2 == 0)
-                color = RAYWHITE;
-
-            Vector2 pos = Vector2Add(
-                board_pos, Vector2Scale(Vector2{x, y}, texture_size * texture_scale));
             DrawRectangleV(
-                pos, Vector2{texture_size * texture_scale, texture_size * texture_scale},
-                color);
+                board2screen_pos(Vector2{x, y}),
+                Vector2{texture_size * texture_scale, texture_size * texture_scale},
+                get_tile_color(Vector2{x, y}));
         }
     }
+}
+
+void Game::draw_selection()
+{
+    if (selected_piece != nullptr)
+    {
+        DrawRectangleV(
+            board2screen_pos(selected_piece->pos),
+            Vector2{texture_scale * texture_size, texture_scale * texture_size},
+            ColorAlphaBlend(RED, RED, Color{200, 200, 200, 200}));
+    }
+}
+
+Vector2 Game::board2screen_pos(Vector2 pos) const
+{
+    // I subtract 1 from piece's position because the rendered position
+    // is 1 less than the in-game position.
+    return Vector2Add(board_pos, Vector2Scale(Vector2{pos.x - 1, pos.y - 1},
+                                              texture_size * texture_scale));
+}
+
+Vector2 Game::screen2board_pos(Vector2 pos) const
+{
+    Vector2 result = Vector2Divide(
+        Vector2Subtract(pos, board_pos),
+        Vector2{texture_size * texture_scale, texture_size * texture_scale});
+
+    result.x = static_cast<int>(result.x + 1);
+    result.y = static_cast<int>(result.y + 1);
+
+    return result;
 }
