@@ -1,12 +1,9 @@
-#ifndef PIECE_H
-#define PIECE_H
+#pragma once
 
 #include <string>
 
 #include <raylib.h>
 
-namespace Piece
-{
 enum class Kind
 {
     Pawn,
@@ -17,8 +14,18 @@ enum class Kind
     King
 };
 
-struct Piece
+class Piece
 {
+public:
+    Piece(const Vector2& _pos, const Kind& _kind, const Color& _color,
+          const std::string& _texture_name)
+        : pos(_pos)
+        , kind(_kind)
+        , color(_color)
+        , texture_name(_texture_name)
+    {
+    }
+
     Vector2 pos;
     Kind kind;
     // This color only represents the team a piece belongs to.
@@ -26,6 +33,3 @@ struct Piece
     Color color;
     std::string texture_name;
 };
-
-}
-#endif  // PIECE_H

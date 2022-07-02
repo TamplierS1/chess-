@@ -1,5 +1,4 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#pragma once
 
 #include <vector>
 #include <unordered_map>
@@ -27,8 +26,8 @@ private:
     void draw_board();
     void draw_selection();
 
-    [[nodiscard]] Vector2 board2screen_pos(Vector2 pos) const;
-    [[nodiscard]] Vector2 screen2board_pos(Vector2 pos) const;
+    Vector2 board2screen_pos(Vector2 pos) const;
+    Vector2 screen2board_pos(Vector2 pos) const;
 
     int window_width = 1920;
     int window_height = 1080;
@@ -40,10 +39,8 @@ private:
     Vector2 board_pos = {(window_width - board_size.x) / 2,
                          (window_height - board_size.y) / 2};
 
-    std::vector<Piece::Piece> board;
+    std::vector<Piece> board;
     std::unordered_map<std::string, Texture2D> textures;
 
-    Piece::Piece* selected_piece = nullptr;
+    Piece* selected_piece = nullptr;
 };
-
-#endif  // ENGINE_H

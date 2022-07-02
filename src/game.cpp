@@ -53,46 +53,34 @@ void Game::init_board()
 {
     // TODO: convert this into a json file.
 
-    board.push_back(Piece::Piece{Vector2{1, 1}, Piece::Kind::Rook, WHITE, "white_rook"});
-    board.push_back(Piece::Piece{Vector2{8, 1}, Piece::Kind::Rook, WHITE, "white_rook"});
+    board.push_back(Piece{Vector2{1, 1}, Kind::Rook, WHITE, "white_rook"});
+    board.push_back(Piece{Vector2{8, 1}, Kind::Rook, WHITE, "white_rook"});
 
-    board.push_back(Piece::Piece{Vector2{1, 8}, Piece::Kind::Rook, BLACK, "black_rook"});
-    board.push_back(Piece::Piece{Vector2{8, 8}, Piece::Kind::Rook, BLACK, "black_rook"});
+    board.push_back(Piece{Vector2{1, 8}, Kind::Rook, BLACK, "black_rook"});
+    board.push_back(Piece{Vector2{8, 8}, Kind::Rook, BLACK, "black_rook"});
 
-    board.push_back(
-        Piece::Piece{Vector2{2, 1}, Piece::Kind::Knight, WHITE, "white_knight"});
-    board.push_back(
-        Piece::Piece{Vector2{7, 1}, Piece::Kind::Knight, WHITE, "white_knight"});
+    board.push_back(Piece{Vector2{2, 1}, Kind::Knight, WHITE, "white_knight"});
+    board.push_back(Piece{Vector2{7, 1}, Kind::Knight, WHITE, "white_knight"});
 
-    board.push_back(
-        Piece::Piece{Vector2{2, 8}, Piece::Kind::Knight, BLACK, "black_knight"});
-    board.push_back(
-        Piece::Piece{Vector2{7, 8}, Piece::Kind::Knight, BLACK, "black_knight"});
+    board.push_back(Piece{Vector2{2, 8}, Kind::Knight, BLACK, "black_knight"});
+    board.push_back(Piece{Vector2{7, 8}, Kind::Knight, BLACK, "black_knight"});
 
-    board.push_back(
-        Piece::Piece{Vector2{3, 1}, Piece::Kind::Bishop, WHITE, "white_bishop"});
-    board.push_back(
-        Piece::Piece{Vector2{6, 1}, Piece::Kind::Bishop, WHITE, "white_bishop"});
+    board.push_back(Piece{Vector2{3, 1}, Kind::Bishop, WHITE, "white_bishop"});
+    board.push_back(Piece{Vector2{6, 1}, Kind::Bishop, WHITE, "white_bishop"});
 
-    board.push_back(
-        Piece::Piece{Vector2{3, 8}, Piece::Kind::Bishop, BLACK, "black_bishop"});
-    board.push_back(
-        Piece::Piece{Vector2{6, 8}, Piece::Kind::Bishop, BLACK, "black_bishop"});
+    board.push_back(Piece{Vector2{3, 8}, Kind::Bishop, BLACK, "black_bishop"});
+    board.push_back(Piece{Vector2{6, 8}, Kind::Bishop, BLACK, "black_bishop"});
 
-    board.push_back(
-        Piece::Piece{Vector2{4, 1}, Piece::Kind::Queen, WHITE, "white_queen"});
-    board.push_back(
-        Piece::Piece{Vector2{4, 8}, Piece::Kind::Queen, BLACK, "black_queen"});
+    board.push_back(Piece{Vector2{4, 1}, Kind::Queen, WHITE, "white_queen"});
+    board.push_back(Piece{Vector2{4, 8}, Kind::Queen, BLACK, "black_queen"});
 
-    board.push_back(Piece::Piece{Vector2{5, 1}, Piece::Kind::King, WHITE, "white_king"});
-    board.push_back(Piece::Piece{Vector2{5, 8}, Piece::Kind::King, BLACK, "black_king"});
+    board.push_back(Piece{Vector2{5, 1}, Kind::King, WHITE, "white_king"});
+    board.push_back(Piece{Vector2{5, 8}, Kind::King, BLACK, "black_king"});
 
     for (int i = 1; i <= 8; i++)
     {
-        board.push_back(
-            Piece::Piece{Vector2{i, 2}, Piece::Kind::Pawn, WHITE, "white_pawn"});
-        board.push_back(
-            Piece::Piece{Vector2{i, 7}, Piece::Kind::Pawn, BLACK, "black_pawn"});
+        board.push_back(Piece{Vector2{i, 2}, Kind::Pawn, WHITE, "white_pawn"});
+        board.push_back(Piece{Vector2{i, 7}, Kind::Pawn, BLACK, "black_pawn"});
     }
 }
 

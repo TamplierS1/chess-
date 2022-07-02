@@ -14,14 +14,9 @@ set(CXX_LINK_FLAGS)
 list(APPEND CXX_COMPILE_FLAGS -std=c++20 -Wall -Wextra -pedantic -Wno-narrowing -Wno-sign-compare
         -Wno-missing-field-initializers)
 
-if (CMAKE_BUILD_TYPE MATCHES Debug)
-    list(APPEND CXX_COMPILE_FLAGS -fno-omit-frame-pointer
-            -fno-optimize-sibling-calls)
-    list(APPEND CXX_LINK_FLAGS
-            -fno-omit-frame-pointer -fno-optimize-sibling-calls)
-elseif (CMAKE_BUILD_TYPE MATCHES Release)
+if (CMAKE_BUILD_TYPE MATCHES Release)
     list(APPEND CXX_COMPILE_FLAGS -O3)
-endif ()
+endif()
 
 set(CXX_INCLUDE_DIRS)
 set(CXX_LINK_LIBS)
